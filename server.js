@@ -4,10 +4,16 @@ const secret = "shhhhhh";
 
 const init = async () => {
   console.log(process.env);
-  const server = Hapi.server({
-    port: process.env.PORT || 3000
-    // host: "localhost"
-  });
+
+  const config = {
+    port: process.env.PORT || 5000
+  };
+
+  if (process.env.NODE_ENV !== "production") {
+    config.host = "localhost";
+  }
+
+  const server = Hapi.server(config);
 
   // const server = new Hapi.Server(~~process.env.PORT || 3000, "0.0.0.0");
 
