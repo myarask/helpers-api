@@ -3,11 +3,13 @@ const jwt = require("jsonwebtoken");
 const secret = "shhhhhh";
 
 const init = async () => {
-  const server = Hapi.server({
-    // port: process.env.PORT || 5000,
-    // port: 5000
-    // host: "localhost"
-  });
+  // const server = newHapi.server({
+  //   port: process.env.PORT || 5000,
+  //   port: 5000
+  //   host: "localhost"
+  // });
+
+  const server = new Hapi.Server(+process.env.PORT, "0.0.0.0");
 
   await server.register([
     require("hapi-auth-jwt2"),
