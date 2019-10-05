@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const secret = "shhhhhh";
 
 const init = async () => {
-  console.log(process.env.PORT);
+  console.log(process.env);
   const server = Hapi.server({
     port: process.env.PORT || 3000
     // host: "localhost"
