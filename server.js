@@ -9,7 +9,7 @@ const init = async () => {
   //   host: "localhost"
   // });
 
-  const server = new Hapi.Server(+process.env.PORT, "0.0.0.0");
+  const server = new Hapi.Server(~~process.env.PORT || 3000, "0.0.0.0");
 
   await server.register([
     require("hapi-auth-jwt2"),
