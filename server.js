@@ -5,7 +5,7 @@ const secret = "shhhhhh";
 const init = async () => {
   const server = Hapi.server({
     // port: process.env.PORT || 5000,
-    port: 5000
+    // port: 5000
     // host: "localhost"
   });
 
