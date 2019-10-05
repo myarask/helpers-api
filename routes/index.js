@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const secret = 'shhhhhh';
 
 module.exports = [
   {
@@ -14,7 +13,7 @@ module.exports = [
     config: { auth: 'simple' },
     handler: (request, h) => {
       const { id, ...body } = request.auth.credentials;
-      const token = jwt.sign({ id }, secret);
+      const token = jwt.sign({ id }, process.env.JWT_SECRET);
 
       const response = h.response(body);
       response.header('Token', token);

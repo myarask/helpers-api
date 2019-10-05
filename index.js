@@ -1,5 +1,5 @@
+require('dotenv').config();
 const Hapi = require('@hapi/hapi');
-const secret = 'shhhhhh';
 
 const init = async () => {
   const config = require('./config');
@@ -50,8 +50,8 @@ const init = async () => {
   });
 
   server.auth.strategy('jwt', 'jwt', {
-    key: secret,
-    validate: async function(decoded, request, h) {
+    key: process.env.JWT_SECRET,
+    validate: async (decoded, request, h) => {
       if ([1, 2, 3].includes(decoded.id)) {
         return { isValid: true };
       }
