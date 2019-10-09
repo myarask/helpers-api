@@ -16,7 +16,7 @@ module.exports = [
       const token = jwt.sign({ id }, process.env.JWT_SECRET);
 
       const response = h.response(body);
-      response.header('token', token);
+      response.header('Token', token);
       return response;
     },
   },
