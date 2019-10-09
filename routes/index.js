@@ -22,12 +22,23 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/restricted',
+    path: '/shifts',
     config: { auth: 'jwt' },
     handler: (request, h) => {
-      const response = h.response({ text: 'You used a Token!' });
-      response.header('Authorization', request.headers.authorization);
-      return response;
+      return [
+        {
+          id: 0,
+          serviceId: 'service_3',
+          clientId: 0,
+          name: 'Mark Yaraskavitch',
+          coordinates: '43.450276,-80.5029037',
+          address: '100 Victoria St S, Room 123',
+          city: 'Kitchener',
+          province: 'Ontario',
+          notes:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+      ];
     },
   },
 ];
