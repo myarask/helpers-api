@@ -22,7 +22,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/shifts',
+    path: '/jobs',
     config: { auth: 'jwt' },
     handler: (request, h) => {
       return [
