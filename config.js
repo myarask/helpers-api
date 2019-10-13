@@ -2,11 +2,8 @@ const config = {
   port: process.env.PORT || 5000,
   routes: {
     cors: {
-      origin: ['*'], // an array of origins or 'ignore'
-      headers: ['Authorization'], // an array of strings - 'Access-Control-Allow-Headers'
-      exposedHeaders: ['Token', 'Accept'], // an array of exposed headers - 'Access-Control-Expose-Headers',
-      maxAge: 0,
-      // credentials: true, // boolean - 'Access-Control-Allow-Credentials'
+      origin: ['*'],
+      additionalHeaders: ['cache-control', 'x-requested-with', 'Token'],
     },
   },
 };
