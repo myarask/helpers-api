@@ -3,7 +3,8 @@ const config = {
   routes: {
     cors: {
       origin: ['*'],
-      additionalHeaders: ['cache-control', 'x-requested-with', 'Token'],
+      additionalHeaders: ['cache-control', 'x-requested-with'],
+      additionalExposedHeaders: ['Token'],
     },
   },
 };
