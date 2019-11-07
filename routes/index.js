@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = [
+  require('./users/get'),
   {
     method: 'GET',
     path: '/',
