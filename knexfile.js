@@ -10,6 +10,9 @@ module.exports = {
       password: process.env.PSQL_PASSWORD,
       ssl: true,
     },
+    migrations: {
+      tableName: 'knex_migrations',
+    },
   },
 
   staging: {
