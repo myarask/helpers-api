@@ -1,7 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+const glob = require('glob');
+const path = require('path');
+
+// Dynamically load all routes
+const routes = glob.sync('./routes/*/**/index.js').map(file => require(path.resolve(file)));
+
 module.exports = [
-  require('./users/get'),
+  ...routes,
   {
     method: 'GET',
     path: '/',
