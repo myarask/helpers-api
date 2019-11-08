@@ -1,3 +1,4 @@
+const { knexSnakeCaseMappers } = require('objection');
 require('dotenv').config();
 
 module.exports = {
@@ -46,4 +47,5 @@ module.exports = {
     //   tableName: 'knex_migrations'
     // }
   },
+  ...knexSnakeCaseMappers(),
 };
