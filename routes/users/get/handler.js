@@ -1,4 +1,3 @@
-module.exports = services => (request, h) => {
-  console.log(h);
-  return services.users.select();
+module.exports = services => request => {
+  return services.users.read(request.query);
 };
