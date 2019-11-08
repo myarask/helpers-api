@@ -7,4 +7,7 @@ module.exports = {
   read: () => {
     return User.query().select();
   },
+  update: (...args) => {
+    return User.query().patchAndFetchById(...args);
+  },
 };
