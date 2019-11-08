@@ -13,4 +13,9 @@ module.exports = {
   update: (...args) => {
     return User.query().patchAndFetchById(...args);
   },
+  delete: id => {
+    return User.query()
+      .where({ id })
+      .del();
+  },
 };
