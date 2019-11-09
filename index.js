@@ -7,51 +7,10 @@ const init = async () => {
 
   await server.register([require('hapi-auth-jwt2'), require('@hapi/basic')]);
 
-  server.auth.strategy('simple', 'basic', {
-    validate: async (request, username, password) => {
-      console.log(username, password);
-      if (username === 'helper@helpers.ca' && password === 'helper@helpers.ca') {
-        return {
-          isValid: true,
-          credentials: {
-            userId: 1,
-          },
-        };
-      }
-
-      if (username === 'client@helpers.ca' && password === 'client@helpers.ca') {
-        return {
-          isValid: true,
-          credentials: {
-            id: 2,
-          },
-        };
-      }
-
-      if (username === 'requester@helpers.ca' && password === 'requester@helpers.ca') {
-        return {
-          isValid: true,
-          credentials: {
-            id: 3,
-          },
-        };
-      }
-
-      return { isValid: false };
-    },
-  });
-
-  server.auth.strategy('jwt', 'jwt', {
-    key: process.env.JWT_SECRET,
-    validate: async (decoded, request, h) => {
-      if ([1, 2, 3].includes(decoded.id)) {
-        return { isValid: true };
-      }
-
-      return { isValid: false };
-    },
-  });
-
+  const basic = require('./auth/basic');
+  const jwt = require('./auth/basic');
+  server.auth.strategy('simple', 'basic', basic);
+  server.auth.strategy('jwt', 'jwt', jwt);
   server.auth.default('jwt');
 
   const routes = require('./routes');
