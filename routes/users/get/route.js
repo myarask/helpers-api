@@ -6,7 +6,16 @@ module.exports = handler => ({
   handler,
   options: {
     validate: {
-      query: Joi.object({}),
+      query: Joi.object({
+        page: Joi.number()
+          .integer()
+          .positive()
+          .default(0),
+        pageSize: Joi.number()
+          .integer()
+          .positive()
+          .default(100),
+      }),
     },
   },
 });

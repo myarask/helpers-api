@@ -7,8 +7,10 @@ module.exports = {
   create: payload => {
     return User.query().insert(payload);
   },
-  read: () => {
-    return User.query().select(columns);
+  read: (page, pageSize) => {
+    return User.query()
+      .select(columns)
+      .page(page, pageSize);
   },
   update: (...args) => {
     return User.query().patchAndFetchById(...args);
