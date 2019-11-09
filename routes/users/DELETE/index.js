@@ -1,5 +1,5 @@
 const services = {
-  users: require('../../../services/users'),
+  users: require('../../../services/crud')('users'),
 };
 
 module.exports = require('./route')(require('./handler')(services));
