@@ -14,10 +14,7 @@ const init = async () => {
         return {
           isValid: true,
           credentials: {
-            id: 1,
-            isHelper: true,
-            isClient: false,
-            isRequester: false,
+            userId: 1,
           },
         };
       }
@@ -27,9 +24,6 @@ const init = async () => {
           isValid: true,
           credentials: {
             id: 2,
-            isHelper: false,
-            isClient: true,
-            isRequester: false,
           },
         };
       }
@@ -39,9 +33,6 @@ const init = async () => {
           isValid: true,
           credentials: {
             id: 3,
-            isHelper: false,
-            isClient: false,
-            isRequester: true,
           },
         };
       }

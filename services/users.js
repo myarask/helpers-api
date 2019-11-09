@@ -4,8 +4,8 @@ const User = require('../models/User');
 const columns = ['id', 'createdAt', 'updatedAt', 'email'];
 
 module.exports = {
-  create: payload => {
-    return User.query().insert(payload);
+  create: content => {
+    return User.query().insert(content);
   },
   read: (page, pageSize) => {
     return User.query()

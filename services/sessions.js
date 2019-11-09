@@ -1,8 +1,8 @@
 const Session = require('../models/Session');
 
 module.exports = {
-  create: payload => {
-    return Session.query().insert(payload);
+  create: content => {
+    return Session.query().insert(content);
   },
   read: options => {
     return Session.query()
