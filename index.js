@@ -11,7 +11,7 @@ const init = async () => {
   const jwt = require('./auth/basic');
   server.auth.strategy('simple', 'basic', basic);
   server.auth.strategy('jwt', 'jwt', jwt);
-  server.auth.default('jwt');
+  // server.auth.default('jwt');
 
   const routes = require('./routes');
   server.route(routes);
