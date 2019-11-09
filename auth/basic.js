@@ -1,15 +1,17 @@
+const User = require('../models/User');
+
 module.exports = {
-  validate: async (request, username, password) => {
-    console.log(username, password);
-    if (username === 'helper@helpers.ca' && password === 'helper@helpers.ca') {
-      return {
+  validate: (request, email, password) => {
+    return User.query()
+      .select('id')
+      .where({ email, password })
+      .first()
+      .then(result => ({
         isValid: true,
         credentials: {
-          userId: 1,
+          userId: result.id,
         },
-      };
-    }
-
-    return { isValid: false };
+      }))
+      .catch(() => ({ isValid: false }));
   },
 };
