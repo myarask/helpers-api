@@ -7,10 +7,10 @@ module.exports = services => request => {
   console.log(request.auth.credentials);
   console.log(token);
 
-  const row = {
+  const content = {
     userId,
     token: jwt.sign({ userId }, process.env.JWT_SECRET),
   };
 
-  return services.sessions.create(row);
+  return services.sessions.create(content);
 };
