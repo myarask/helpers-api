@@ -7,6 +7,7 @@ module.exports = {
   read: options => {
     return Session.query()
       .select()
+      .where({ isDeleted: false })
       .page(options.page, options.pageSize);
   },
   update: (...args) => {
@@ -14,7 +15,7 @@ module.exports = {
   },
   delete: id => {
     return Session.query()
-      .where({ id })
-      .del();
+      .patch({ isDeleted: true, deletedAt: new Date().toISOString() })
+      .where({ id });
   },
 };

@@ -10,6 +10,7 @@ module.exports = {
   read: (page, pageSize) => {
     return User.query()
       .select(columns)
+      .where({ isDeleted: false })
       .page(page, pageSize);
   },
   update: (...args) => {
@@ -17,7 +18,7 @@ module.exports = {
   },
   delete: id => {
     return User.query()
-      .where({ id })
-      .del();
+      .patch({ isDeleted: true, deletedAt: new Date().toISOString() })
+      .where({ id });
   },
 };
