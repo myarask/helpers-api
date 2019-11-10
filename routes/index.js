@@ -2,7 +2,7 @@ const glob = require('glob');
 const path = require('path');
 const Joi = require('@hapi/joi');
 const crud = require('../services/crud');
-const tables = ['users', 'sessions'];
+const tables = require('../tables');
 
 const routes = tables.reduce(
   (acc, table) => [
