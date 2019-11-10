@@ -1,18 +1,30 @@
-const models = {
-  sessions: require('../models/Session'),
-  users: require('../models/User'),
-};
+// const models = {
+//   sessions: require('../models/Session'),
+//   users: require('../models/User'),
+// };
+
+const models = require('../models');
 
 module.exports = key => ({
   create: content => {
     return models[key].query().insert(content);
   },
-  read: ({ page, pageSize, ...conditions }) => {
-    return models[key]
-      .query()
-      .where({ isDeleted: false })
-      .andWhere(conditions)
-      .page(page, pageSize);
+  read: async ({ limit, offset, ...conditions }) => {
+    const [data, count] = await Promise.all([
+      models[key]
+        .query()
+        .where({ isDeleted: false })
+        .andWhere(conditions)
+        .offset(offset)
+        .limit(limit),
+      models[key]
+        .query()
+        .where({ isDeleted: false })
+        .andWhere(conditions)
+        .count('id')
+        .first(),
+    ]);
+    return { data, length: parseInt(count.count) };
   },
   update: (...args) => {
     return models[key].query().patchAndFetchById(...args);

@@ -1,5 +1,6 @@
-const services = {
-  sessions: require('../../../services/crud')('sessions'),
-};
+module.exports = routes => {
+  const i = routes.findIndex(route => route.method === 'POST' && route.path === '/sessions');
 
-module.exports = require('./route')(require('./handler')(services));
+  routes[i].config = { auth: 'simple' };
+  routes[i].handler = require('./handler');
+};

@@ -1,8 +1,71 @@
 const glob = require('glob');
 const path = require('path');
+const Joi = require('@hapi/joi');
+const crud = require('../services/crud');
+const tables = ['users', 'sessions'];
 
-// Dynamically load all routes
-const routes = glob.sync('./routes/*/**/index.js').map(file => require(path.resolve(file)));
+const routes = tables.reduce(
+  (acc, table) => [
+    ...acc,
+    {
+      method: 'GET',
+      path: `/${table}`,
+      handler: request => crud(table).read(request.query),
+      options: {
+        validate: {
+          query: Joi.object({
+            offset: Joi.number()
+              .integer()
+              .positive()
+              .default(0),
+            limit: Joi.number()
+              .integer()
+              .positive()
+              .default(100),
+          }),
+        },
+      },
+    },
+    {
+      method: 'POST',
+      path: `/${table}`,
+      handler: request => crud(table).create(request.payload),
+    },
+    {
+      method: 'PATCH',
+      path: `/${table}/{id}`,
+      handler: request => crud(table).update(request.params.id, request.payload),
+      options: {
+        validate: {
+          params: Joi.object({
+            id: Joi.number()
+              .integer()
+              .positive()
+              .required(),
+          }),
+        },
+      },
+    },
+    {
+      method: 'DELETE',
+      path: `/${table}/{id}`,
+      handler: request => crud(table).delete(request.params.id),
+      options: {
+        validate: {
+          params: Joi.object({
+            id: Joi.number()
+              .integer()
+              .positive()
+              .required(),
+          }),
+        },
+      },
+    },
+  ],
+  []
+);
+
+glob.sync('./routes/*/**/index.js').forEach(file => require(path.resolve(file))(routes));
 
 module.exports = [
   ...routes,

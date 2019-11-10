@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
+const crud = require('../../../services/crud');
 
-module.exports = services => request => {
+module.exports = request => {
   const { userId } = request.auth.credentials;
 
   const content = {
@@ -8,5 +9,5 @@ module.exports = services => request => {
     token: jwt.sign({ userId }, process.env.JWT_SECRET),
   };
 
-  return services.sessions.create(content);
+  return crud('sessions').create(content);
 };
