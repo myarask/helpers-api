@@ -1,13 +1,14 @@
-const { Model, snakeCaseMappers } = require('objection');
-const knex = require('../db/knex');
+const Knex = require('knex');
+const { Model, knexSnakeCaseMappers } = require('objection');
+
+const knex = Knex({
+  ...require('../knexfile')[process.env.ENVIRONMENT || 'development'],
+  ...knexSnakeCaseMappers(),
+});
 
 Model.knex(knex);
 
 class BaseModel extends Model {
-  static get columnNameMappers() {
-    return snakeCaseMappers();
-  }
-
   $beforeInsert() {
     this.createdAt = new Date().toISOString();
   }
