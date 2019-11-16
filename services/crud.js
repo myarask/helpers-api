@@ -13,13 +13,11 @@ module.exports = key => ({
     const [data, count] = await Promise.all([
       models[key]
         .query()
-        .where({ isDeleted: false })
         .andWhere(conditions)
         .offset(offset)
         .limit(limit),
       models[key]
         .query()
-        .where({ isDeleted: false })
         .andWhere(conditions)
         .count('id')
         .first(),
@@ -29,10 +27,10 @@ module.exports = key => ({
   update: (...args) => {
     return models[key].query().patchAndFetchById(...args);
   },
-  delete: id => {
+  delete: conditions => {
     return models[key]
       .query()
-      .patch({ is_deleted: true, deleted_at: new Date().toISOString() })
-      .where({ id });
+      .delete()
+      .where(conditions);
   },
 });

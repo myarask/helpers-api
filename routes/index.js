@@ -49,7 +49,7 @@ const routes = tables.reduce(
     {
       method: 'DELETE',
       path: `/${table}/{id}`,
-      handler: request => crud(table).delete(request.params.id),
+      handler: request => crud(table).delete(request.params),
       options: {
         validate: {
           params: Joi.object({
