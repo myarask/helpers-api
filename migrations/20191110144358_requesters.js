@@ -3,8 +3,9 @@ exports.up = knex => {
     table.increments().primary();
     table.timestamps();
     table.integer('user_id').notNullable();
+    table.string('customer_id').notNullable();
 
-    table.unique(['user_id']);
+    table.unique(['customer_id']);
     table.foreign('user_id').references('users.id');
   });
 };
