@@ -1,6 +1,10 @@
-module.exports = routes => {
-  const i = routes.findIndex(route => route.method === 'POST' && route.path === '/sessions');
+const { method, path } = require('../../../utils/routes')(__filename);
 
-  routes[i].config = { auth: 'simple' };
-  routes[i].handler = require('./handler');
+module.exports = {
+  method,
+  path,
+  handler: require('./handler'),
+  config: {
+    auth: 'simple',
+  },
 };

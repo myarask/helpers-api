@@ -1,8 +1,3 @@
-// const models = {
-//   sessions: require('../models/Session'),
-//   users: require('../models/User'),
-// };
-
 const models = require('../models');
 
 module.exports = key => ({
