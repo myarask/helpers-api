@@ -1,4 +1,5 @@
 const User = require('../models').users;
+const Boom = require('@hapi/boom');
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
       .where({ email })
       .first();
 
-    if (!user) return { isValid: false };
+    if (!user) throw Boom.notFound('Email not found');
 
     const isValid = bcrypt.compareSync(password, user.hash);
 

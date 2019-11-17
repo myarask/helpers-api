@@ -1,4 +1,4 @@
-const tables = require('../tables');
+const tables = ['users', 'sessions', 'requesters'];
 const BaseModel = require('./_base');
 
 const models = tables.reduce(
