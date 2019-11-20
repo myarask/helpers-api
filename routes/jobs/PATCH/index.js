@@ -5,4 +5,14 @@ module.exports = {
   method,
   path,
   handler: require('./handler')(table),
+  options: {
+    validate: {
+      query: {
+        id: Joi.number().integer(),
+      },
+      payload: Joi.object({
+        notes: Joi.string(),
+      }),
+    },
+  },
 };

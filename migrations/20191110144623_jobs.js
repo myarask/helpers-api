@@ -4,7 +4,7 @@ exports.up = knex => {
     table.timestamps();
     table.integer('requester_id').notNullable();
     table.integer('client_id').notNullable();
-    table.integer('helper_id').notNullable();
+    table.integer('helper_id');
     table.string('notes');
 
     table.foreign('requester_id').references('requesters.id');
