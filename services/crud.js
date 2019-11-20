@@ -19,8 +19,11 @@ module.exports = key => ({
     ]);
     return { data, length: parseInt(count.count) };
   },
-  update: (...args) => {
-    return models[key].query().patchAndFetchById(...args);
+  update: (conditions, values) => {
+    return models[key]
+      .query()
+      .where(conditions)
+      .update(values);
   },
   delete: conditions => {
     return models[key]

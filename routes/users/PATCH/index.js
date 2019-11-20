@@ -10,6 +10,11 @@ module.exports = {
       query: {
         id: Joi.number().integer(),
       },
+      payload: Joi.object({
+        firstName: Joi.string(),
+        lastName: Joi.string(),
+        email: Joi.string().email(),
+      }),
     },
   },
 };
