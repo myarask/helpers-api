@@ -2,13 +2,13 @@ const crud = require('../../../services/crud');
 const bcrypt = require('bcrypt');
 
 module.exports = request => {
-  const { email, password } = request.payload;
+  const { password, ...rest } = request.payload;
   const saltRounds = 10;
 
   const hash = bcrypt.hashSync(password, saltRounds);
   const content = {
-    email,
     hash,
+    ...rest,
   };
 
   return crud('users')
