@@ -6,8 +6,6 @@ module.exports = filename => {
   const table = folders.pop();
   const path = ('/' + table).replace('__id__', '/{id}/').replace('__id', '/{id}');
 
-  console.log(method, path);
-
   return {
     method,
     path,
