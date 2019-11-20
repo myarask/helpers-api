@@ -1,8 +1,8 @@
 const crud = require('../../../services/crud');
 
-module.exports = request => {
+module.exports = table => request => {
   const values = request.payload;
   const conditions = request.query;
 
-  return crud('users').update(conditions, values);
+  return crud(table).update(conditions, values);
 };

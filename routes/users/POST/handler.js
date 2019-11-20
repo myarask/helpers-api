@@ -1,7 +1,7 @@
 const crud = require('../../../services/crud');
 const bcrypt = require('bcrypt');
 
-module.exports = request => {
+module.exports = table => request => {
   const { password, ...rest } = request.payload;
   const saltRounds = 10;
 
@@ -11,7 +11,7 @@ module.exports = request => {
     ...rest,
   };
 
-  return crud('users')
+  return crud(table)
     .create(content)
     .then(({ hash, ...rest }) => rest);
 };
