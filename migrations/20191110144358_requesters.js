@@ -6,6 +6,7 @@ exports.up = knex => {
     table.string('customer_id').notNullable();
 
     table.unique(['customer_id']);
+    table.unique(['user_id']);
     table.foreign('user_id').references('users.id');
   });
 };
