@@ -8,7 +8,7 @@ module.exports = {
   options: {
     validate: {
       query: {
-        userId: Joi.number().integer(),
+        id: Joi.number().integer(),
       },
     },
   },
