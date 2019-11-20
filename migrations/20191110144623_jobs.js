@@ -5,7 +5,7 @@ exports.up = knex => {
     table.integer('requester_id').notNullable();
     table.integer('client_id').notNullable();
     table.integer('helper_id').notNullable();
-    table.string('special_requests');
+    table.string('notes');
 
     table.foreign('requester_id').references('requesters.id');
     table.foreign('client_id').references('clients.id');

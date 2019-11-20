@@ -4,6 +4,8 @@ exports.up = knex => {
     table.timestamps();
     table.string('email').notNullable();
     table.string('hash').notNullable();
+    table.string('first_name');
+    table.string('last_name');
 
     table.unique(['email']);
   });
