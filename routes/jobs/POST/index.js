@@ -10,11 +10,14 @@ module.exports = {
       payload: Joi.object({
         requesterId: Joi.number()
           .integer()
+          .positive()
           .required(),
         clientId: Joi.number()
           .integer()
+          .positive()
           .required(),
         notes: Joi.string(),
+        status: Joi.string().required(),
       }),
     },
   },

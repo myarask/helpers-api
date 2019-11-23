@@ -8,10 +8,13 @@ module.exports = {
   options: {
     validate: {
       query: {
-        id: Joi.number().integer(),
+        id: Joi.number()
+          .integer()
+          .positive(),
       },
       payload: Joi.object({
         notes: Joi.string(),
+        status: Joi.string(),
       }),
     },
   },
