@@ -18,6 +18,9 @@ module.exports = {
           .min(0)
           .max(100)
           .default(100),
+        id: Joi.number()
+          .integer()
+          .positive(),
       },
     },
   },

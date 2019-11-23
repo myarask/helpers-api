@@ -17,7 +17,7 @@ module.exports = {
           .positive()
           .required(),
         notes: Joi.string(),
-        status: Joi.string().required(),
+        status: Joi.string().default('draft'),
       }),
     },
   },
