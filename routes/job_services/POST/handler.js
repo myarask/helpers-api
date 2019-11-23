@@ -4,7 +4,7 @@ module.exports = table => async request => {
   const { serviceId, jobId } = request.payload;
   const conditions = { id: serviceId };
 
-  const service = await crud('services').readSingle(conditions);
+  const service = await crud('services').readOne(conditions);
 
   const { name, description, flatFee } = service;
 

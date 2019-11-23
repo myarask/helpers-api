@@ -19,7 +19,8 @@ module.exports = key => ({
     ]);
     return { data, length: parseInt(count.count) };
   },
-  readSingle: conditions =>
+  readAll: conditions => models[key].query().where(conditions),
+  readOne: conditions =>
     models[key]
       .query()
       .where(conditions)
