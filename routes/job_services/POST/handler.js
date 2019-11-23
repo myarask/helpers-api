@@ -2,8 +2,9 @@ const crud = require('../../../services/crud');
 
 module.exports = table => async request => {
   const { serviceId, jobId } = request.payload;
+  const conditions = { id: serviceId };
 
-  const service = await crud('services').readById(serviceId);
+  const service = await crud('services').readSingle(conditions);
 
   const { name, description, flatFee } = service;
 

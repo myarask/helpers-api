@@ -8,6 +8,7 @@ const tables = [
   'admins',
   'jobs',
   'job_services',
+  'services',
 ];
 const BaseModel = require('./_base');
 
