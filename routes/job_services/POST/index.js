@@ -7,16 +7,14 @@ module.exports = {
   handler: require('./handler')(table),
   options: {
     validate: {
-      payload: Joi.array().items(
-        Joi.object({
-          jobId: Joi.number()
-            .integer()
-            .required(),
-          serviceId: Joi.number()
-            .integer()
-            .required(),
-        })
-      ),
+      payload: Joi.object({
+        jobId: Joi.number()
+          .integer()
+          .required(),
+        serviceId: Joi.number()
+          .integer()
+          .required(),
+      }),
     },
   },
 };

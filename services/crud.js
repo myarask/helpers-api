@@ -19,6 +19,11 @@ module.exports = key => ({
     ]);
     return { data, length: parseInt(count.count) };
   },
+  readSingle: conditions =>
+    models[key]
+      .query()
+      .where(conditions)
+      .first(),
   update: (conditions, values) => {
     return models[key]
       .query()

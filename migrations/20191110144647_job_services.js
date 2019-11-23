@@ -4,6 +4,8 @@ exports.up = knex => {
     table.timestamps();
     table.integer('job_id').notNullable();
     table.integer('service_id').notNullable();
+    table.string('name').notNullable();
+    table.string('description').notNullable();
     table.decimal('flat_fee', 14, 2);
 
     table.unique(['job_id', 'service_id']);
