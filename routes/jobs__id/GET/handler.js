@@ -7,8 +7,16 @@ module.exports = async request => {
     crud('job_services').readAll({ jobId: job.id }),
     crud('clients')
       .readOne({ id: job.clientId })
-      .then(client => client.userId)
-      .then(userId => crud('users').readOne({ id: userId })),
+      .then(client =>
+        crud('users')
+          .readOne({ id: client.userId })
+          .then(user => ({
+            id: client.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          }))
+      ),
   ]);
 
   return {
