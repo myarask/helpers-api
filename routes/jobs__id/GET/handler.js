@@ -19,6 +19,10 @@ module.exports = async request => {
       ),
   ]);
 
+  const feesBeforeTaxes = services.map(service => Number(service.flatFee)).reduce((acc, fee) => acc + fee, 0);
+  const taxes = feesBeforeTaxes * 0.13;
+  const feesAfterTaxes = feesBeforeTaxes + taxes;
+
   return {
     client: {
       id: client.id,
@@ -26,8 +30,14 @@ module.exports = async request => {
       firstName: client.firstName,
       lastName: client.lastName,
     },
-    services,
+    services: services.map(service => ({
+      ...service,
+      flatFee: `$${service.flatFee}`,
+    })),
     status: job.status,
     notes: job.notes,
+    feesBeforeTaxes: `$${feesBeforeTaxes.toFixed(2)}`,
+    taxes: `$${taxes.toFixed(2)}`,
+    feesAfterTaxes: `$${feesAfterTaxes.toFixed(2)}`,
   };
 };
