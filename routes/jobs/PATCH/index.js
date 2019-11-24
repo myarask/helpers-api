@@ -14,7 +14,7 @@ module.exports = {
       },
       payload: Joi.object({
         notes: Joi.string(),
-        status: Joi.string().valid('open'),
+        status: Joi.string().valid('open', 'cancelled'),
       }),
     },
   },
