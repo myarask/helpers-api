@@ -21,6 +21,10 @@ module.exports = {
         id: Joi.number()
           .integer()
           .positive(),
+        status: Joi.string(),
+        requesterId: Joi.number()
+          .integer()
+          .positive(),
       },
     },
   },
