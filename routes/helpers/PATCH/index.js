@@ -7,12 +7,10 @@ module.exports = {
   handler: require('./handler')(table),
   options: {
     validate: {
-      payload: Joi.object({
-        userId: Joi.number()
-          .integer()
-          .positive()
-          .required(),
-      }),
+      query: {
+        id: Joi.number().integer(),
+      },
+      payload: Joi.object({}),
     },
   },
 };

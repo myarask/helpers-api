@@ -11,16 +11,6 @@ module.exports = {
         id: Joi.number()
           .integer()
           .positive(),
-        offset: Joi.number()
-          .integer()
-          .min(0)
-          .max(100)
-          .default(0),
-        limit: Joi.number()
-          .integer()
-          .min(0)
-          .max(100)
-          .default(100),
       },
     },
   },

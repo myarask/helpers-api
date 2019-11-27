@@ -11,6 +11,8 @@ module.exports = {
         id: Joi.number()
           .integer()
           .positive(),
+        compensation: Joi.string(),
+        isHelping: Joi.boolean(),
         offset: Joi.number()
           .integer()
           .min(0)

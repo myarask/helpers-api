@@ -12,6 +12,9 @@ module.exports = {
           .integer()
           .positive()
           .required(),
+        compensation: Joi.string()
+          .valid('salary')
+          .valid('piece work'),
       }),
     },
   },
