@@ -13,29 +13,39 @@ module.exports = table => async request => {
   const session = await crud(table).create(content);
 
   const ids = await Promise.all([
+    models.users
+      .query()
+      .select('email', 'firstName', 'lastName')
+      .where({ id: userId })
+      .first(),
     models.requesters
       .query()
       .select('id')
-      .where({ userId }),
+      .where({ userId })
+      .first(),
     models.clients
       .query()
       .select('id')
-      .where({ userId }),
+      .where({ userId })
+      .first(),
     models.helpers
       .query()
       .select('id')
-      .where({ userId }),
+      .where({ userId })
+      .first(),
     models.admins
       .query()
       .select('id')
-      .where({ userId }),
+      .where({ userId })
+      .first(),
   ]);
 
   return {
     ...session,
-    requesterId: ids[0].length ? ids[0][0].id : null,
-    clientId: ids[1].length ? ids[1][0].id : null,
-    helperId: ids[2].length ? ids[2][0].id : null,
-    adminId: ids[3].length ? ids[3][0].id : null,
+    ...ids[0],
+    requesterId: ids[1] ? ids[1].id : null,
+    clientId: ids[2] ? ids[2].id : null,
+    helperId: ids[3] ? ids[3].id : null,
+    adminId: ids[4] ? ids[4].id : null,
   };
 };

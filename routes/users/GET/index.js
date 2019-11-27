@@ -8,6 +8,7 @@ module.exports = {
   options: {
     validate: {
       query: {
+        id: Joi.number().integer(),
         offset: Joi.number()
           .integer()
           .min(0)
