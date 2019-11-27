@@ -33,9 +33,9 @@ module.exports = table => async request => {
 
   return {
     ...session,
-    requesterId: ids[0].length ? ids[0][0].id : undefined,
-    clientId: ids[1].length ? ids[1][0].id : undefined,
-    helperId: ids[2].length ? ids[2][0].id : undefined,
-    adminId: ids[3].length ? ids[3][0].id : undefined,
+    requesterId: ids[0].length ? ids[0][0].id : null,
+    clientId: ids[1].length ? ids[1][0].id : null,
+    helperId: ids[2].length ? ids[2][0].id : null,
+    adminId: ids[3].length ? ids[3][0].id : null,
   };
 };
