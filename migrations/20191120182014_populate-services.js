@@ -33,6 +33,7 @@ exports.up = knex => {
   ]);
 };
 
-exports.down = knex => {
+exports.down = async knex => {
+  await knex('job_services').delete();
   return knex('services').delete();
 };
