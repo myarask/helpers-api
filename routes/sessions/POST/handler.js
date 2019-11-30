@@ -14,7 +14,7 @@ const fetchId = (key, userId) =>
 module.exports = table => async request => {
   const { userId } = request.auth.credentials;
 
-  const [user, requesterId, clientId, helperId, adminId] = await Promise.all([
+  const [user, requesterId, clientId, helper, adminId] = await Promise.all([
     models.users
       .query()
       .select('email', 'firstName', 'lastName')
@@ -22,7 +22,12 @@ module.exports = table => async request => {
       .first(),
     fetchId('requesters', userId),
     fetchId('clients', userId),
-    fetchId('helpers', userId),
+    models.helpers
+      .query()
+      .select('id as helperId', 'isHelping')
+      .where({ userId })
+      .first()
+      .catch(() => ({ helperId: null })),
     fetchId('admins', userId),
   ]);
 
@@ -30,7 +35,7 @@ module.exports = table => async request => {
     userId,
     requesterId,
     clientId,
-    helperId,
+    helperId: helper.helperId,
     adminId,
   };
 
@@ -44,6 +49,7 @@ module.exports = table => async request => {
   return {
     ...session,
     ...user,
+    ...helper,
     ...tokenContent,
   };
 };
