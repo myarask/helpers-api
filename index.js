@@ -7,10 +7,11 @@ const init = async () => {
 
   await server.register([require('hapi-auth-jwt2'), require('@hapi/basic')]);
 
-  const basic = require('./auth/basic');
-  const jwt = require('./auth/basic');
-  server.auth.strategy('simple', 'basic', basic);
-  server.auth.strategy('jwt', 'jwt', jwt);
+  server.auth.strategy('simple', 'basic', require('./auth/basic'));
+  server.auth.strategy('jwt', 'jwt', require('./auth/jwt'));
+  server.auth.strategy('jwt-client', 'jwt', require('./auth/jwt-client'));
+  server.auth.strategy('jwt-helper', 'jwt', require('./auth/jwt-helper'));
+  server.auth.strategy('jwt-requester', 'jwt', require('./auth/jwt-requester'));
   // server.auth.default('jwt');
 
   const routes = require('./routes');
