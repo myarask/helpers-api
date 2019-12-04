@@ -1,7 +1,14 @@
 const crud = require('../../../services/crud');
+const Boom = require('@hapi/boom');
 
 module.exports = async request => {
+  const { helperId } = request.auth.credentials;
+
   const job = await crud('jobs').readOne(request.params);
+
+  if (helperId && job.helperId !== helperId) {
+    throw Boom.unauthorized();
+  }
 
   const [services, client] = await Promise.all([
     crud('job_services').readAll({ jobId: job.id }),

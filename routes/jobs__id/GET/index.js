@@ -13,5 +13,6 @@ module.exports = {
           .positive(),
       },
     },
+    auth: 'jwt',
   },
 };
