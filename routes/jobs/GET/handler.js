@@ -1,7 +1,7 @@
 const crud = require('../../../services/crud');
 const validate = require('./validate');
 
-module.exports = table => async request => {
+module.exports = table => request => {
   validate(request);
 
   const conditions = request.query;
