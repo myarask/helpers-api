@@ -27,7 +27,7 @@ module.exports = table => async request => {
       .select('id as helperId', 'isHelping')
       .where({ userId })
       .first()
-      .catch(() => ({ helperId: null })),
+      .then(resp => resp || { helperId: null }),
     fetchId('admins', userId),
   ]);
 
