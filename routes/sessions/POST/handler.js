@@ -47,9 +47,9 @@ module.exports = table => async request => {
   const session = await crud(table).create(content);
 
   return {
-    ...session,
     ...user,
     ...helper,
     ...tokenContent,
+    ...session,
   };
 };
