@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 const crud = require('../../../services/crud');
 const models = require('../../../models');
 
-const fetchId = (key, userId) =>
+const fetchId = (key, conditions) =>
   models[key]
     .query()
     .select('id')
-    .where({ userId })
+    .where(conditions)
     .first()
     .then(({ id }) => id)
     .catch(() => null);
@@ -20,22 +20,26 @@ module.exports = table => async request => {
       .select('email', 'firstName', 'lastName')
       .where({ id: userId })
       .first(),
-    fetchId('requesters', userId),
-    fetchId('clients', userId),
+    fetchId('requesters', { userId }),
+    fetchId('clients', { userId }),
     models.helpers
       .query()
       .select('id as helperId', 'isHelping')
       .where({ userId })
       .first()
       .then(resp => resp || { helperId: null }),
-    fetchId('admins', userId),
+    fetchId('admins', { userId }),
   ]);
+
+  const { helperId } = helper;
+
+  const activeJobId = helperId ? await fetchId('jobs', { helperId, status: 'reserved' }) : undefined;
 
   const tokenContent = {
     userId,
     requesterId,
     clientId,
-    helperId: helper.helperId,
+    helperId: helperId,
     adminId,
   };
 
@@ -51,5 +55,6 @@ module.exports = table => async request => {
     ...helper,
     ...tokenContent,
     ...session,
+    activeJobId,
   };
 };
