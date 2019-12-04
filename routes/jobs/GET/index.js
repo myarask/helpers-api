@@ -21,11 +21,15 @@ module.exports = {
         id: Joi.number()
           .integer()
           .positive(),
-        status: Joi.string(),
+        status: Joi.string().valid('draft', 'cancelled', 'open', 'reserved'),
+        helperId: Joi.number()
+          .integer()
+          .positive(),
         requesterId: Joi.number()
           .integer()
           .positive(),
       },
     },
+    auth: 'jwt',
   },
 };
