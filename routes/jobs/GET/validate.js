@@ -1,7 +1,8 @@
 const Boom = require('@hapi/boom');
 
-module.exports = (credentials, conditions) => {
-  const { helperId } = credentials;
+module.exports = request => {
+  const conditions = request.query;
+  const { helperId } = request.auth.credentials;
 
   if (helperId) {
     if (!conditions.status) {
