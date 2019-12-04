@@ -6,8 +6,9 @@ module.exports = async request => {
 
   const job = await crud('jobs').readOne(request.params);
 
-  if (helperId && job.helperId !== helperId) {
-    throw Boom.unauthorized();
+  if (helperId) {
+    if (job.helperId !== helperId) throw Boom.unauthorized();
+    if (job.status === 'draft') throw Boom.unauthorized();
   }
 
   const [services, client] = await Promise.all([
