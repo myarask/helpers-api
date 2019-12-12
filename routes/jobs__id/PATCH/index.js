@@ -14,7 +14,7 @@ module.exports = {
       },
       payload: Joi.object({
         notes: Joi.string(),
-        status: Joi.string().valid('open', 'cancelled', 'reserved'),
+        status: Joi.string().valid('open', 'cancelled', 'reserved', 'in_progress', 'reviewing', 'complete'),
         helperId: Joi.number()
           .integer()
           .positive(),
