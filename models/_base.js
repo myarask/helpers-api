@@ -2,7 +2,8 @@ const Knex = require('knex');
 const { Model, knexSnakeCaseMappers } = require('objection');
 
 const knex = Knex({
-  ...require('../knexfile')[process.env.ENVIRONMENT || 'development'],
+  // ...require('../knexfile')[process.env.ENVIRONMENT || 'development'],
+  ...require('../knexfile')['development'],
   ...knexSnakeCaseMappers(),
 });
 
