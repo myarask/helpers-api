@@ -7,10 +7,13 @@ const config = {
       additionalExposedHeaders: ['Token'],
     },
   },
+  debug: {
+    request: ['error'],
+  },
 };
 
-if (process.env.NODE_ENV !== 'production') {
-  config.host = 'localhost';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   config.host = 'localhost';
+// }
 
 module.exports = config;
