@@ -2,8 +2,8 @@ const crud = require('../../../services/crud');
 const Boom = require('@hapi/boom');
 
 module.exports = table => async request => {
-  const { userId } = request.auth.credentials;
-
+  const { clientId } = request.payload;
+  const { userId } = await crud('clients').readOne({ id: clientId });
   const addresses = await crud('addresses').readAll({ userId });
 
   if (!addresses.length) throw Boom.notFound('User is missing an address');
