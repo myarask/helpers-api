@@ -14,8 +14,9 @@ module.exports = {
         starRating: Joi.number()
           .integer()
           .min(1)
-          .max(5),
-        comment: Joi.string(),
+          .max(5)
+          .allow(null),
+        comment: Joi.string().allow(null),
       }),
     },
     auth: 'jwt',

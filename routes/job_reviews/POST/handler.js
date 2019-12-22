@@ -1,7 +1,7 @@
 const crud = require('../../../services/crud');
 
 module.exports = table => request => {
-  const { userId } = request.credentials;
+  const { userId } = request.auth.credentials;
 
   const content = {
     userId,
