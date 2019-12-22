@@ -20,5 +20,6 @@ module.exports = {
         status: Joi.string().default('draft'),
       }),
     },
+    auth: 'jwt-requester',
   },
 };
