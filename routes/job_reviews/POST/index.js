@@ -16,7 +16,7 @@ module.exports = {
           .min(1)
           .max(5)
           .allow(null),
-        comment: Joi.string().allow(null),
+        comments: Joi.string().allow(null),
       }),
     },
     auth: 'jwt',
