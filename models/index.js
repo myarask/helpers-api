@@ -8,6 +8,7 @@ const tables = [
   'admins',
   'jobs',
   'job_services',
+  'job_reviews',
   'services',
   'addresses',
 ];
