@@ -21,7 +21,8 @@ module.exports = {
         id: Joi.number()
           .integer()
           .positive(),
-        status: Joi.string().valid('draft', 'cancelled', 'open', 'reserved'),
+        // status: Joi.string().valid('draft', 'cancelled', 'open', 'reserved'),
+        statuses: Joi.string(),
         helperId: Joi.number()
           .integer()
           .positive(),

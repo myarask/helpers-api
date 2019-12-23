@@ -5,13 +5,16 @@ module.exports = request => {
   const { helperId } = request.auth.credentials;
 
   if (helperId) {
-    if (!conditions.status) {
+    if (!conditions.statuses) {
       throw Boom.unauthorized('Helpers must specify a status');
-    } else if (conditions.status === 'draft') {
+    }
+    const statuses = conditions.statuses.split(',');
+
+    if (statuses.includes('draft')) {
       throw Boom.unauthorized('Helpers may not read jobs with status "draft"');
-    } else if (conditions.status === 'cancelled') {
+    } else if (statuses.includes('cancelled')) {
       throw Boom.unauthorized('Helpers may not read jobs with status "cancelled"');
-    } else if (conditions.status === 'reserved' && !conditions.helperId) {
+    } else if (statuses.includes('reserved') && !conditions.helperId) {
       throw Boom.unauthorized('Helpers may not read jobs with status "reserved" without a helperId');
     } else if (conditions.helperId && conditions.helperId !== helperId) {
       throw Boom.unauthorized('Helpers may only specify their own helperId');
