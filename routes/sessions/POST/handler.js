@@ -33,7 +33,17 @@ module.exports = table => async request => {
 
   const { helperId } = helper;
 
-  const activeJobId = helperId ? await fetchId('jobs', { helperId, status: 'reserved' }) : undefined;
+  // const activeJobId = helperId ? await fetchId('jobs', { helperId, status: 'reserved' }) : undefined;
+  const activeJobId = helperId
+    ? await models.jobs
+        .query()
+        .select('id')
+        .where({ helperId })
+        .whereIn('status', ['reserved', 'in_progress', 'reviewing'])
+        .first()
+        .then(({ id }) => id)
+        .catch(() => null)
+    : undefined;
 
   const tokenContent = {
     userId,
