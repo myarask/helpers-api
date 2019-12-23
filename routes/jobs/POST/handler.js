@@ -18,5 +18,7 @@ module.exports = table => async request => {
     line2: address.line2,
     postal_code: address.postal_code,
     state: address.state,
+    lng: address.lng,
+    lat: address.lat,
   });
 };
