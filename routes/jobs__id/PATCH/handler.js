@@ -5,7 +5,7 @@ module.exports = table => async request => {
   const values = request.payload;
   const conditions = request.params;
 
-  console.log(1);
+  console.log(values);
 
   if (values.status === 'reviewing') {
     // Charge the requester for the job
