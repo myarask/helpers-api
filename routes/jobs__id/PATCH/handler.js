@@ -5,11 +5,8 @@ module.exports = table => async request => {
   const values = request.payload;
   const conditions = request.params;
 
-  console.log(values);
-
   if (values.status === 'reviewing') {
     // Charge the requester for the job
-    console.log(2);
     const job = await crud(table).readOne(conditions);
 
     const [requester, jobServices] = await Promise.all([
@@ -18,20 +15,16 @@ module.exports = table => async request => {
     ]);
 
     const amount = jobServices.reduce((acc, obj) => acc + Number(obj.flatFee) || 0, 0);
-    console.log(jobServices);
-    console.log(amount);
+
     if (amount) {
+      // TODO: put chargeId in the jobs table?
       const charge = await stripe.charges.create({
         amount: Math.round(amount * 1.13 * 100), // Charge HST and convert to cents
         currency: 'cad',
         customer: requester.customerId,
-      });
-
-      console.log(charge);
-
-      return crud(table).update(conditions, {
-        ...values,
-        chargeId: charge.id,
+        metadata: {
+          jobId: job.id,
+        },
       });
     }
   }
