@@ -9,6 +9,8 @@ exports.up = knex => {
     table.string('line2');
     table.string('postal_code');
     table.string('state').notNullable();
+    table.float('lat', 14, 10).notNullable();
+    table.float('lng', 14, 10).notNullable();
 
     table.foreign('user_id').references('users.id');
   });

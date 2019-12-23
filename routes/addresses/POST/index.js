@@ -16,7 +16,7 @@ module.exports = {
           .required()
           .valid(['CA']),
         line1: Joi.string().required(),
-        line2: Joi.string(),
+        line2: Joi.string().allow(''),
         postal_code: Joi.string(),
         state: Joi.string().required(),
       }),
