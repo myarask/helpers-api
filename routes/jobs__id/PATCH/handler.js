@@ -22,7 +22,7 @@ module.exports = table => async request => {
     console.log(amount);
     if (amount) {
       const charge = await stripe.charges.create({
-        amount: amount * 1.13, // Charge HST
+        amount: Math.round(amount * 1.13 * 100), // Charge HST and convert to cents
         currency: 'cad',
         customer: requester.customerId,
       });
