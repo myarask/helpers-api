@@ -50,6 +50,8 @@ module.exports = async request => {
     line2: job.line2,
     postal_code: job.postal_code,
     state: job.state,
+    lng: job.lng,
+    lat: job.lat,
     feesBeforeTaxes: `$${feesBeforeTaxes.toFixed(2)}`,
     taxes: `$${taxes.toFixed(2)}`,
     feesAfterTaxes: `$${feesAfterTaxes.toFixed(2)}`,
