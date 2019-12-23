@@ -17,7 +17,7 @@ module.exports = table => async request => {
       crud('job_services').readAll({ jobId: job.id }),
     ]);
 
-    const amount = jobServices.reduce((acc, obj) => acc + obj.flat_fee || 0, 0);
+    const amount = jobServices.reduce((acc, obj) => acc + Number(obj.flat_fee) || 0, 0);
     console.log(jobServices);
     console.log(amount);
     if (amount) {
