@@ -18,13 +18,16 @@ module.exports = table => async request => {
     ]);
 
     const amount = jobServices.reduce((acc, obj) => acc + obj.flat_fee || 0, 0);
-
+    console.log(jobServices);
+    console.log(amount);
     if (amount) {
       const charge = await stripe.charges.create({
         amount: amount * 1.13, // Charge HST
         currency: 'cad',
         customer: requester.customerId,
       });
+
+      console.log(charge);
 
       return crud(table).update(conditions, {
         ...values,
