@@ -32,11 +32,9 @@ module.exports = table => async request => {
         },
       };
       const promise = axios.get(url, options).then(resp => {
-        job = {
-          ...job,
-          distance: resp.data.rows[0].elements[0].distance.text,
-          duration: resp.data.rows[0].elements[0].duration.text,
-        };
+        console.log(resp.data);
+        job.distance = resp.data.rows[0].elements[0].distance.text;
+        job.duration = resp.data.rows[0].elements[0].duration.text;
       });
       return [...acc, promise];
     }, []);
