@@ -29,6 +29,12 @@ module.exports = {
         requesterId: Joi.number()
           .integer()
           .positive(),
+        lng: Joi.number()
+          .min(-180)
+          .max(180),
+        lat: Joi.number()
+          .min(-90)
+          .max(90),
       },
     },
     auth: 'jwt',

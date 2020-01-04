@@ -4,7 +4,10 @@ const models = require('../../../models');
 module.exports = table => async request => {
   validate(request);
 
-  const { statuses, offset, limit, ...conditions } = request.query;
+  const { statuses, offset, limit, lng, lat, ...conditions } = request.query;
+
+  if (lng !== undefined && lat !== undefined) {
+  }
 
   const [data, count] = await Promise.all([
     models.jobs
