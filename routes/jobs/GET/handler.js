@@ -27,8 +27,8 @@ module.exports = table => async request => {
       const options = {
         params: {
           key: process.env.GOOGLE_KEY,
-          origins: `${lng},${lat}`,
-          destinations: `${job.lng},${job.lat}`,
+          origins: `${lat},${lng}`,
+          destinations: `${job.lat},${job.lng}`,
         },
       };
       const promise = axios.get(url, options).then(resp => {
