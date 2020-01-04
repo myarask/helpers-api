@@ -31,15 +31,15 @@ module.exports = table => async request => {
           destinations: `${job.lat},${job.lng}`,
         },
       };
+
       const promise = axios.get(url, options).then(resp => {
-        console.log(resp.data);
-        console.log(resp.data.rows[0].elements);
         const element = resp.data.rows[0].elements[0];
         if (element.status === 'OK') {
           job.distance = resp.data.rows[0].elements[0].distance.text;
           job.duration = resp.data.rows[0].elements[0].duration.text;
         }
       });
+
       return [...acc, promise];
     }, []);
 
