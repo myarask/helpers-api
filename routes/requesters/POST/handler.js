@@ -13,7 +13,7 @@ module.exports = table => async request => {
 
   const content = {
     customer_id: customer.id,
-    user_id: request.payload.user_id,
+    user_id: userId,
   };
 
   return crud(table).create(content);
