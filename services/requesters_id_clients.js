@@ -6,7 +6,7 @@ module.exports = {
       .query()
       .select(['requester_clients.clientId', 'users.email', 'users.firstName', 'users.lastName'])
       .where({ 'requester_clients.requesterId': id })
-      .rightJoin('clients', { 'requester_clients.id': 'clients.id' })
+      .rightJoin('clients', { 'requester_clients.clientId': 'clients.id' })
       .join('users', { 'users.id': 'clients.userId' });
   },
 };
